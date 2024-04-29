@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.stazxr.muses</groupId>
+    <artifactId>muses-dependencies</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>muses-dependencies</name>
+    <url>https://github.com/stazxr/muses</url>
+    <description>
+        Muses 是一个基于 Spring Boot 的 Java 开发框架，旨在简化 Java 开发流程并提升代码质量。
+        该框架提供了一系列模块化的组件和工具，涵盖了常见的业务需求和技术场景。
+        目前，项目基于 Spring Boot 2.6.3 构建了基线版本，并持续完善各功能模块，以满足开发者的需求。
+    </description>
+
+    <developers>
+        <developer>
+            <name>Sun Tao</name>
+            <email>1027353579@qq.com</email>
+            <url>https://www.suntaoblog.com</url>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://github.com/stazxr/muses/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/stazxr/muses.git</connection>
+        <developerConnection>scm:git:https://github.com/stazxr/muses.git</developerConnection>
+        <url>https://github.com/stazxr/muses</url>
+        <!-- <tag>1.0.0</tag> -->
+    </scm>
+
+    <!-- 版本号管理 -->
+    <properties>
+        <!-- maven properties -->
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- muses properties -->
+        <muses.version>${project.version}</muses.version>
+        <!-- springboot properties -->
+        <springboot.version>2.6.3</springboot.version>
+    </properties>
+
+    <!-- 版本管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot Dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${springboot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
