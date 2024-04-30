@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.stazxr.muses</groupId>
+		<artifactId>muses-dependencies</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>muses-starter</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>${project.artifactId}</name>
+	<description>Muses 自动配置模块，提供自动配置相关组件，快速集成，减少开发及配置成本</description>
+
+	<modules>
+		<!-- Spring ApplicationContext 自动配置 -->
+		<module>spring-context-spring-boot</module>
+	</modules>
+</project>

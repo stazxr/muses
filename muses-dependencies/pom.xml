@@ -9,7 +9,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>muses-dependencies</name>
+    <name>${project.artifactId}</name>
     <url>https://github.com/stazxr/muses</url>
     <description>
         Muses 是一个基于 Spring Boot 的 Java 开发框架，旨在简化 Java 开发流程并提升代码质量。
@@ -17,13 +17,13 @@
         目前，项目基于 Spring Boot 2.6.3 构建了基线版本，并持续完善各功能模块，以满足开发者的需求。
     </description>
 
-    <developers>
-        <developer>
+    <contributors>
+        <contributor>
             <name>Sun Tao</name>
             <email>1027353579@qq.com</email>
             <url>https://www.suntaoblog.com</url>
-        </developer>
-    </developers>
+        </contributor>
+    </contributors>
 
     <licenses>
         <license>
