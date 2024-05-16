@@ -1,6 +1,7 @@
 package com.github.stazxr.muses.utils.mask.filter;
 
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.github.stazxr.muses.utils.base.collection.CollectionUtils;
 import com.github.stazxr.muses.utils.mask.MaskUtil;
 import com.github.stazxr.muses.utils.mask.core.FieldMask;
 
@@ -66,7 +67,7 @@ public class MaskFilter implements ValueFilter {
         }
         if (value instanceof Map) {
             Map<?, ?> newMap = (Map<?, ?>) value;
-            Map<Object, Object> maskMap = new HashMap<>();
+            Map<Object, Object> maskMap = new HashMap<>(CollectionUtils.mapSize(newMap.size()));
             newMap.forEach((k, v) -> {
                 if (v instanceof String) {
                     maskMap.put(k, MaskUtil.desensitized((String) v, fieldMask.type()));
