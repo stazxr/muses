@@ -7,10 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 脱敏类型
+ * 脱敏类型枚举。
+ * <p>
+ * 该枚举定义了常见数据脱敏类型及其对应的脱敏规则，用于对敏感数据进行脱敏处理。
+ * </p>
  *
- * @author SunTao
  * @since 2024-05-15
+ * @author SunTao
  */
 public enum MaskType implements MaskStrategy {
     /**
@@ -129,12 +132,17 @@ public enum MaskType implements MaskStrategy {
 
     private final MaskStrategy strategy;
 
+    /**
+     * 构造一个脱敏类型枚举对象。
+     *
+     * @param strategy 脱敏策略
+     */
     MaskType(MaskStrategy strategy) {
         this.strategy = strategy;
     }
 
     /**
-     * 脱敏函数
+     * 对给定数据执行脱敏操作。
      *
      * @param data 待脱敏的数据
      * @return 脱敏后的值

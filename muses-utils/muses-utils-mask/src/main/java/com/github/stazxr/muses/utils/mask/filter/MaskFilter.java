@@ -9,12 +9,23 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * JSON 脱敏过滤实现
+ * JSON 脱敏过滤实现。
+ * <p>
+ * 该类实现了 JSON 值过滤器接口 {@link com.alibaba.fastjson.serializer.ValueFilter}，用于对 JSON 中的敏感数据进行脱敏处理。
+ * </p>
  *
- * @author SunTao
  * @since 2024-05-16
+ * @author SunTao
  */
 public class MaskFilter implements ValueFilter {
+    /**
+     * 处理 JSON 中的字段值。
+     *
+     * @param obj   对象
+     * @param name  字段名
+     * @param value 字段值
+     * @return 处理后的字段值
+     */
     @Override
     public Object process(Object obj, String name, Object value) {
         Field field = null;
@@ -39,6 +50,13 @@ public class MaskFilter implements ValueFilter {
         return value;
     }
 
+    /**
+     * 对字段值进行脱敏处理。
+     *
+     * @param field 字段
+     * @param value 字段值
+     * @return 脱敏后的字段值
+     */
     private Object maskValue(Field field, Object value) {
         if (field.isAnnotationPresent(FieldMask.class)) {
             FieldMask fieldMask = field.getAnnotation(FieldMask.class);
@@ -50,7 +68,14 @@ public class MaskFilter implements ValueFilter {
         return value;
     }
 
-    private Object doMaskValue(FieldMask fieldMask, Object value) {
+    /**
+     * 执行字段值的脱敏操作。
+     *
+     * @param fieldMask 字段脱敏注解
+     * @param value     字段值
+     * @return 脱敏后的字段值
+     */
+    protected Object doMaskValue(FieldMask fieldMask, Object value) {
         if (value instanceof String) {
             return MaskUtil.desensitized(String.valueOf(value), fieldMask.type());
         }

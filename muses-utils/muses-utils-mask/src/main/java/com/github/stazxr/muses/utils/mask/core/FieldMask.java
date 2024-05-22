@@ -5,10 +5,13 @@ import com.github.stazxr.muses.utils.mask.MaskType;
 import java.lang.annotation.*;
 
 /**
- * 字段脱敏注解
+ * 字段脱敏注解。
+ * <p>
+ * 该注解用于标记需要进行脱敏的字段。
+ * </p>
  *
- * @author SunTao
  * @since 2024-05-15
+ * @author SunTao
  */
 @Documented
 @Target(ElementType.FIELD)

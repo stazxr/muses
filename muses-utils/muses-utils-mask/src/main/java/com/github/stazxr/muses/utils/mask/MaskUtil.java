@@ -1,8 +1,8 @@
 package com.github.stazxr.muses.utils.mask;
 
 import com.alibaba.fastjson.JSON;
-import com.github.stazxr.muses.utils.log.LogUtil;
 import com.github.stazxr.muses.utils.mask.filter.MaskFilter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 脱敏工具类
@@ -10,6 +10,7 @@ import com.github.stazxr.muses.utils.mask.filter.MaskFilter;
  * @author SunTao
  * @since 2024-05-15
  */
+@Slf4j
 public class MaskUtil {
     private static final MaskFilter MASK_FILTER = new MaskFilter();
 
@@ -25,8 +26,8 @@ public class MaskUtil {
         try {
             return JSON.toJSONString(data, MASK_FILTER);
         } catch (Exception e) {
-            LogUtil.sysError(MASK_LOG_LABEL, e);
-            return "";
+            log.error(MASK_LOG_LABEL, e);
+            return JSON.toJSONString(data);
         }
     }
 
