@@ -14,23 +14,8 @@ public class IpUtilTest {
         String ip = IpUtil.parseNumToIp(ipNum);
         System.out.println(ip);
 
-        String charFromIpString = IpUtil.get7CharFromIpString("192.255.27.1");
+        String charFromIpString = IpUtil.get7CharFromIpString("192.255.27.2", 3);
         System.out.println(charFromIpString);
-
-        System.out.println("-----------------");
-
-        int count = 1;
-        long ipNum1 = IpUtil.formatIpToNum("192.255.27.3");
-        ipNum1 |= (long) count << 32;
-        System.out.println("ipNum1: " + ipNum1);
-
-        String parseStr = Long.toString(ipNum, 36);
-        StringBuilder builder = new StringBuilder("0000000");
-        builder.replace(7 - parseStr.length(), 7, parseStr);
-        String char7 = builder.toString().toUpperCase();
-        System.out.println("char7: " + char7);
-
-        long ipNum2 = Long.parseLong(parseStr, 36);
-        System.out.println("ipNum2: " + ipNum2);
+        System.out.println(Arrays.toString(IpUtil.parse7CharToIpCountAry(charFromIpString)));
     }
 }

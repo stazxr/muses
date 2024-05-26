@@ -1,5 +1,7 @@
 package com.github.stazxr.muses.utils.base.net;
 
+import com.github.stazxr.muses.utils.base.math.Base36Converter;
+import com.github.stazxr.muses.utils.base.math.BigIntegerLongConversion;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,18 +12,23 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class IpUtil {
-    private static final String LOG_PREFIX = "muses-utils-base[IpUtil]: ";
+    /**
+     * IP地址计数器最大值
+     */
+    public static final int MAX_IP_COUNT = 17;
 
     private static final int IP4_PART_NUM = 4;
-
-    private static final int MAX_IP_COUNT = 17;
 
     /**
      * IPv4地址的数值表示是一个32位的无符号整数 [0, 2^32-1]
      */
     private static final long IP_NUM_MAX_RANGE = (255L << 24) | (255L << 16) | (255L << 8) | 255L;
 
+    private static final int IP4_STRING_LENGTH = 7;
+
     private static final long BYTE_MASK = 0xFF;
+
+    private static final String LOG_PREFIX = "muses-utils-base[IpUtil]: ";
 
     /**
      * 将字符串格式的IPv4地址转换为其数值表示。
@@ -112,9 +119,30 @@ public class IpUtil {
         ipNum |= (long) count << 32;
 
         // 将IP地址和计数器转换为36进制表示，并保证结果长度为7位
-        String parseStr = Long.toString(ipNum, 36);
+        String parseStr = Base36Converter.decimalToBase36(BigIntegerLongConversion.longToBigInteger(ipNum));
         StringBuilder builder = new StringBuilder("0000000");
-        builder.replace(7 - parseStr.length(), 7, parseStr);
+        builder.replace(IP4_STRING_LENGTH - parseStr.length(), IP4_STRING_LENGTH, parseStr);
         return builder.toString().toUpperCase();
+    }
+
+    /**
+     * 解析7位长度的字符串为IP地址和计数值
+     *
+     * @param ipString IP和计数器的字符串标识(get7CharFromIpString 方法生成)
+     * @return [ip, count]
+     * @throws IllegalArgumentException 如果计数值超出有效范围 [0, 17]
+     */
+    public static String[] parse7CharToIpCountAry(String ipString) {
+        if (ipString.length() != IP4_STRING_LENGTH) {
+            throw new IllegalArgumentException(LOG_PREFIX + "Ip string length out of range [7]: " + ipString);
+        }
+
+        long ipCountNum = BigIntegerLongConversion.bigIntegerToLong(Base36Converter.base36ToDecimal(ipString));
+        int count = (int) ((ipCountNum >> 32) & BYTE_MASK);
+        String ip = String.valueOf((ipCountNum >> 24) & BYTE_MASK) + '.' +
+                ((ipCountNum >> 16) & BYTE_MASK) + '.' +
+                ((ipCountNum >> 8) & BYTE_MASK) + '.' +
+                (ipCountNum & BYTE_MASK);
+        return new String[] {ip, String.valueOf(count)};
     }
 }
