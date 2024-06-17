@@ -7,46 +7,44 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 脱敏类型枚举。
- * <p>
- * 该枚举定义了常见数据脱敏类型及其对应的脱敏规则，用于对敏感数据进行脱敏处理。
- * </p>
+ * Enumeration defining common data masking types and their rules for sensitive data handling.
  *
- * @since 2024-05-15
  * @author SunTao
+ * @since 2024-05-15
  */
 public enum MaskType implements MaskStrategy {
     /**
-     * 首字符脱敏，脱敏规则：若字符串长度大于等于一，则对第一个字符进行脱敏，ABC => *BC
+     * Masking the first character. Rule: If the string length is >= 1, mask the first character.
+     * Example: ABC => *BC
      */
     FIRST_MASK(StringUtil::hideFirstChar),
 
     /**
-     * 密码，脱敏规则：123456 => ******; 123456789 => ******
+     * Password masking. Rule: 123456 => ******; 123456789 => ******
      */
     PASSWORD(data -> MaskConstants.PASSWORD_MASK),
 
     /**
-     * 手机号，脱敏规则：隐藏手机号中间四位
+     * Mobile number masking. Rule: Hide the middle four digits of the mobile number.
      */
     MOBILE_NUMBER(data -> {
         if (data.length() == MaskConstants.MOBILE_NUMBER_LEN) {
-            // 标准手机号
+            // Standard mobile number
             return data.substring(0, 3) + MaskConstants.OTHER_MASK + data.substring(7);
         } else {
-            // 非标准手机号
+            // Non-standard mobile number
             return StringUtil.hideFirstChar(data);
         }
     }),
 
     /**
-     * 座机号，脱敏规则：隐藏中间部分或尾缀
+     * Landline number masking. Rule: Hide middle part or suffix.
      */
     LANDLINE_NUMBER(data -> {
         int landlineNumPart = 3;
         int minLandlineNumLen = 6;
         if (data.length() > minLandlineNumLen) {
-            // 标准做记号 000 + 000 + 0000 或 000-000-0000
+            // Standard landline number format like 000-000-0000 or 0000000000
             String[] landParts = data.split("-");
             if (landParts.length == landlineNumPart) {
                 return landParts[0] + "-" + MaskConstants.OTHER_MASK + "-" + landParts[2];
@@ -54,13 +52,13 @@ public enum MaskType implements MaskStrategy {
                 return data.substring(0, data.length() - 4) + MaskConstants.OTHER_MASK;
             }
         } else {
-            // 非标准座机号
+            // Non-standard landline number
             return StringUtil.hideFirstChar(data);
         }
     }),
 
     /**
-     * 用户名，脱敏规则：隐藏中甲部分
+     * Username masking. Rule: Hide middle part.
      */
     USERNAME(data -> {
         int minUsernameLen = 3;
@@ -72,44 +70,44 @@ public enum MaskType implements MaskStrategy {
     }),
 
     /**
-     * 邮箱，强脱敏，脱敏规则：隐藏用户名部分
+     * Email masking (strong). Rule: Hide username part.
      */
     EMAIL(data -> {
         int atIndex = data.indexOf("@");
         if (atIndex != -1) {
-            // 标准邮箱
+            // Standard email format
             return MaskConstants.OTHER_MASK + data.substring(atIndex);
         } else {
-            // 邮箱地址有误，不需要脱敏
+            // Invalid email address, no need to mask
             return data;
         }
     }),
 
     /**
-     * 邮箱，低脱敏，脱敏规则：对用户名部分二次脱敏
+     * Email masking (weak). Rule: Secondary masking of username part.
      */
     EMAIL_WEAK(data -> {
         int atIndex = data.indexOf("@");
         if (atIndex != -1) {
-            // 标准邮箱
-            String maskUsername = USERNAME.maskFun(data.substring(0, atIndex));
+            // Standard email format
+            String maskUsername = USERNAME.applyMask(data.substring(0, atIndex));
             return maskUsername + data.substring(atIndex);
         } else {
-            // 邮箱地址有误，不需要脱敏
+            // Invalid email address, no need to mask
             return data;
         }
     }),
 
     /**
-     * 地址，脱敏规则：
+     * Address masking. Rule: Not yet implemented.
      */
     ADDRESS(data -> {
-        // TODO 暂不处理
+        // TODO: Not implemented yet
         return data;
     }),
 
     /**
-     * 身份证号，脱敏规则：对标准身份证好进行脱敏处理，隐藏个人信息
+     * ID card number masking. Rule: Mask personal information in standard ID card numbers.
      */
     ID_CARD(data -> {
         if (data.length() == MaskConstants.ID_CARD_LEN) {
@@ -119,7 +117,7 @@ public enum MaskType implements MaskStrategy {
     }),
 
     /**
-     * 企鹅号，脱敏规则：
+     * QQ number masking. Rule: Mask middle part or last few digits.
      */
     QQ_NUMBER(data -> {
         if (data.length() >= MaskConstants.MIN_QQ_LEN) {
@@ -133,26 +131,26 @@ public enum MaskType implements MaskStrategy {
     private final MaskStrategy strategy;
 
     /**
-     * 构造一个脱敏类型枚举对象。
+     * Constructs a masking type enum object.
      *
-     * @param strategy 脱敏策略
+     * @param strategy Masking strategy
      */
     MaskType(MaskStrategy strategy) {
         this.strategy = strategy;
     }
 
     /**
-     * 对给定数据执行脱敏操作。
+     * Applies masking operation to given data.
      *
-     * @param data 待脱敏的数据
-     * @return 脱敏后的值
+     * @param data Data to be masked
+     * @return Masked value
      */
     @Override
-    public String maskFun(String data) {
+    public String applyMask(String data) {
         try {
-            return strategy.maskFun(data);
+            return strategy.applyMask(data);
         } catch (Exception e) {
-            log.error("data mask error", e);
+            log.error("Data mask error", e);
             return data;
         }
     }

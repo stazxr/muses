@@ -1,11 +1,12 @@
 package com.github.stazxr.muses.utils.mask;
 
 import com.alibaba.fastjson.JSON;
+import com.github.stazxr.muses.utils.mask.core.MaskStrategy;
 import com.github.stazxr.muses.utils.mask.filter.MaskFilter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 脱敏工具类
+ * Utility class for data masking.
  *
  * @author SunTao
  * @since 2024-05-15
@@ -17,10 +18,10 @@ public class MaskUtil {
     private static final String MASK_LOG_LABEL = "muses-utils-mask:mask data error";
 
     /**
-     * 数据脱敏
+     * Masking data.
      *
-     * @param data 待脱敏数据
-     * @return 脱敏后的字符串
+     * @param data Data to be masked
+     * @return Masked string
      */
     public static String toMaskString(Object data) {
         try {
@@ -32,13 +33,24 @@ public class MaskUtil {
     }
 
     /**
-     * 字符串脱敏
+     * String masking.
      *
-     * @param cha  待脱敏字符串
-     * @param type 脱敏类型
-     * @return 脱敏后的字符串
+     * @param cha  String to be masked
+     * @param type Mask type
+     * @return Masked string
      */
     public static String desensitized(CharSequence cha, MaskType type) {
         return type.mask(String.valueOf(cha));
+    }
+
+    /**
+     * String masking using custom strategy.
+     *
+     * @param cha      String to be masked
+     * @param strategy Masking strategy
+     * @return Masked string
+     */
+    public static String desensitized(CharSequence cha, MaskStrategy strategy) {
+        return strategy.mask(String.valueOf(cha));
     }
 }
