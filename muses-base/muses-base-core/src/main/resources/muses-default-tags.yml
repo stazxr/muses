@@ -1,0 +1,8 @@
+tags:
+  - {tagName: 'muses-sysCode', tagScope: '3'}
+  - {tagName: 'muses-appCode', tagScope: '3'}
+  - {tagName: 'muses-deployCode', tagScope: '3'}
+  - {tagName: 'muses-userIp', tagScope: '3'}
+  - {tagName: 'muses-loginId', tagScope: '3'}
+  - {tagName: 'muses-traceNo', tagScope: '3'}
+  - {tagName: 'muses-locale', tagScope: '3'}
