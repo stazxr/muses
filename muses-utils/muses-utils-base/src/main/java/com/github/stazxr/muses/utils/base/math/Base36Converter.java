@@ -3,19 +3,19 @@ package com.github.stazxr.muses.utils.base.math;
 import java.math.BigInteger;
 
 /**
- * Base36Converter 是一个用于在 36 进制字符串和十进制数值之间进行转换的工具类。
- * 36 进制包括数字 0-9 和字母 A-Z，共计 36 个字符。
+ * Base36Converter is a utility class for converting between Base36 strings and decimal numbers.
+ * Base36 consists of digits 0-9 and letters A-Z, totaling 36 characters.
  *
  * @author SunTao
  * @since 2024-05-26
  */
 public class Base36Converter {
     /**
-     * 将 36 进制字符串转换为十进制数字。
-     * 
-     * @param base36 36 进制字符串，不能为 null 或空字符串
-     * @return 对应的十进制数字
-     * @throws NumberFormatException 如果 base36 不是有效的 36 进制字符串
+     * Converts a Base36 string to a decimal BigInteger.
+     *
+     * @param base36 Base36 string, must not be null or empty
+     * @return corresponding decimal BigInteger
+     * @throws NumberFormatException if base36 is not a valid Base36 string
      */
     public static BigInteger base36ToDecimal(String base36) {
         if (base36 == null || base36.isEmpty()) {
@@ -25,11 +25,11 @@ public class Base36Converter {
     }
 
     /**
-     * 将十进制数字转换为 36 进制字符串。
-     * 
-     * @param decimal 十进制数字，不能为 null
-     * @return 对应的 36 进制字符串，使用大写字母表示
-     * @throws IllegalArgumentException 如果 decimal 为 null
+     * Converts a decimal BigInteger to a Base36 string.
+     *
+     * @param decimal decimal BigInteger, must not be null
+     * @return corresponding Base36 string, using uppercase letters
+     * @throws IllegalArgumentException if decimal is null
      */
     public static String decimalToBase36(BigInteger decimal) {
         if (decimal == null) {

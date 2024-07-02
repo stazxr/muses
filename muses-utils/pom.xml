@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Parent project details -->
     <parent>
         <groupId>com.github.stazxr.muses</groupId>
         <artifactId>muses-root</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <!-- Project details -->
     <artifactId>muses-utils</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <description>Muses 工具父模块</description>
+    <description>Muses Utility Parent Module</description>
 
+    <!-- Modules -->
     <modules>
+        <!-- Submodules of the utils project -->
         <module>muses-utils-log</module>
         <module>muses-utils-base</module>
         <module>muses-utils-mask</module>

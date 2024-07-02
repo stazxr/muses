@@ -4,19 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 字符串工具类，提供了一系列字符串处理的静态方法。
- * <p>
- * 该类包含以下方法：
- * <ul>
- *     <li>{@link #isEmpty(String)}: 判断字符串是否为空</li>
- *     <li>{@link #isBlank(String)}: 判断字符串是否为空或者只包含空白字符</li>
- *     <li>{@link #isNotBlank(String)}: 判断字符串是否不为空且不只包含空白字符</li>
- *     <li>{@link #hasEmpty(String...)}: 判断字符串数组中是否存在为空的字符串</li>
- *     <li>{@link #hasBlank(String...)}: 判断字符串数组中是否存在为空或者只包含空白字符的字符串</li>
- *     <li>{@link #cameCaseToSubLine(String)}: 将驼峰风格的字符串转换为下划线风格</li>
- *     <li>{@link #hideFirstChar(String)}: 隐藏字符串的首个字符，用星号替换</li>
- * </ul>
- * </p>
+ * String utility class providing a series of static methods for string handling.
  *
  * @author SunTao
  * @since 2024-05-05
@@ -24,43 +12,40 @@ import java.util.regex.Pattern;
 public final class StringUtil {
 
     /**
-     * 判断字符串是否为空。
+     * Checks if a string is empty.
      *
-     * @param str 待判断的字符串
-     * @return 如果字符串为 {@code null} 或者空字符串则返回 {@code true}，否则返回 {@code false}
+     * @param str The string to check
+     * @return {@code true} if the string is {@code null} or empty, {@code false} otherwise
      */
     public static boolean isEmpty(String str) {
-        return null == str || "".equals(str);
+        return str == null || str.isEmpty();
     }
 
     /**
-     * 判断字符串是否为空或者只包含空白字符。
-     * <p>
-     * 字符串为空或者只包含空白字符时返回 {@code true}，否则返回 {@code false}。
-     * </p>
+     * Checks if a string is empty or contains only whitespace characters.
      *
-     * @param str 待判断的字符串
-     * @return 如果字符串为 {@code null} 或者只包含空白字符则返回 {@code true}，否则返回 {@code false}
+     * @param str The string to check
+     * @return {@code true} if the string is {@code null} or contains only whitespace characters, {@code false} otherwise
      */
     public static boolean isBlank(String str) {
-        return null == str || "".equals(str.trim());
+        return str == null || str.trim().isEmpty();
     }
 
     /**
-     * 判断字符串是否不为空且不只包含空白字符。
+     * Checks if a string is not empty and does not contain only whitespace characters.
      *
-     * @param str 待判断的字符串
-     * @return 如果字符串不为空且不只包含空白字符则返回 {@code true}，否则返回 {@code false}
+     * @param str The string to check
+     * @return {@code true} if the string is not {@code null} and contains at least one non-whitespace character, {@code false} otherwise
      */
     public static boolean isNotBlank(String str) {
         return !isBlank(str);
     }
 
     /**
-     * 判断字符串数组中是否存在为空的字符串。
+     * Checks if any string in the string array is empty.
      *
-     * @param ss 字符串数组
-     * @return 如果字符串数组中存在为空的字符串则返回 {@code true}，否则返回 {@code false}
+     * @param ss The string array to check
+     * @return {@code true} if any string in the array is empty, {@code false} otherwise
      */
     public static boolean hasEmpty(String... ss) {
         for (String s : ss) {
@@ -72,14 +57,14 @@ public final class StringUtil {
     }
 
     /**
-     * 判断字符串数组中是否存在为空或者只包含空白字符的字符串。
+     * Checks if any string in the string array is empty or contains only whitespace characters.
      *
-     * @param ss 字符串数组
-     * @return 如果字符串数组中存在为空或者只包含空白字符的字符串则返回 {@code true}，否则返回 {@code false}
+     * @param ss The string array to check
+     * @return {@code true} if any string in the array is empty or contains only whitespace characters, {@code false} otherwise
      */
     public static boolean hasBlank(String... ss) {
         for (String s : ss) {
-            if (isEmpty(s.trim())) {
+            if (isBlank(s)) {
                 return true;
             }
         }
@@ -87,12 +72,12 @@ public final class StringUtil {
     }
 
     /**
-     * 将驼峰风格的字符串转换为下划线风格。
+     * Converts a camel case string to underscore style.
      *
-     * @param camelCase 驼峰风格的字符串
-     * @return 下划线风格的字符串
+     * @param camelCase The camel case string
+     * @return The underscore style string
      */
-    public static String cameCaseToSubLine(String camelCase) {
+    public static String camelCaseToUnderscore(String camelCase) {
         String az = "[A-Z]";
         Pattern pattern = Pattern.compile(az);
         Matcher matcher = pattern.matcher(camelCase);
@@ -105,10 +90,10 @@ public final class StringUtil {
     }
 
     /**
-     * 隐藏字符串的首个字符，用星号替换。
+     * Masks the first character of a string with an asterisk.
      *
-     * @param data 待脱敏的字符串
-     * @return 脱敏后的字符串
+     * @param data The string to mask
+     * @return The masked string
      */
     public static String hideFirstChar(String data) {
         if (data != null && data.length() > 0) {

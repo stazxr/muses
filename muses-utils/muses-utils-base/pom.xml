@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- Parent project details -->
 	<parent>
 		<groupId>com.github.stazxr.muses</groupId>
 		<artifactId>muses-utils</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
+	<!-- Project details -->
 	<artifactId>muses-utils-base</artifactId>
 	<packaging>jar</packaging>
 
 	<name>${project.artifactId}</name>
-	<description>基础工具模块，包含字符串、日期、IP、集合等常见工具类</description>
+	<description>
+		Base Utilities Module, includes common utility classes for strings, dates, IPs, collections, etc.
+	</description>
 
+	<!-- Dependencies -->
 	<dependencies>
+		<!-- Optional dependency on muses-utils-log -->
 		<dependency>
 			<groupId>com.github.stazxr.muses</groupId>
 			<artifactId>muses-utils-log</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- 基于 HuTool 开发基础工具模块 -->
+
+		<!-- Dependency on HuTool for common utilities -->
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>

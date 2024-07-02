@@ -48,22 +48,95 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- muses properties -->
-        <muses.version>${project.version}</muses.version>
         <!-- springboot properties -->
         <springboot.version>2.6.3</springboot.version>
+        <!-- muses properties -->
+        <muses.version>${project.version}</muses.version>
+        <muses-utils.version>1.0.0-SNAPSHOT</muses-utils.version>
+        <muses-base.version>1.0.0-SNAPSHOT</muses-base.version>
+        <!-- other -->
+        <hutool.version>5.8.18</hutool.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <jackson.version>2.13.0</jackson.version>
     </properties>
 
     <!-- 版本管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Boot Dependencies -->
+            <!-- SpringBoot 依赖管理 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Muses 框架相关依赖-工具模块开始 -->
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-utils-log</artifactId>
+                <version>${muses-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-utils-base</artifactId>
+                <version>${muses-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-utils-mask</artifactId>
+                <version>${muses-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-utils-all</artifactId>
+                <version>${muses-utils.version}</version>
+            </dependency>
+            <!-- Muses 框架相关依赖-工具模块结束 -->
+
+            <!-- Muses 框架相关依赖-基础模块开始 -->
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-base-core</artifactId>
+                <version>${muses-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-base-msg</artifactId>
+                <version>${muses-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-base-exp</artifactId>
+                <version>${muses-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stazxr.muses</groupId>
+                <artifactId>muses-base-log</artifactId>
+                <version>${muses-base.version}</version>
+            </dependency>
+            <!-- Muses 框架相关依赖-基础模块结束 -->
+
+            <!-- Hutool 工具包 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <!-- Json 相关工具包 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

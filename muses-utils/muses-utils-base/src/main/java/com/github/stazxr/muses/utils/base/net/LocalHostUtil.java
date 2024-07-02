@@ -9,7 +9,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * 本地网络工具类，用于获取主机信息、IP地址、MAC地址等。
+ * Local network utility class for obtaining host information, IP addresses, MAC addresses, etc.
  *
  * @author SunTao
  * @since 2024-05-05
@@ -19,49 +19,49 @@ public final class LocalHostUtil {
     }
 
     /**
-     * 获取本地主机名称。
+     * Retrieves the local host name.
      *
-     * @return 本地主机名称
-     * @throws UnknownHostException 如果无法解析本地主机名称为地址
+     * @return local host name
+     * @throws UnknownHostException if the local host name cannot be resolved to an address
      */
     public static String getLocalHostName() throws UnknownHostException {
         return InetAddress.getLocalHost().getHostName();
     }
 
     /**
-     * 获取本地主机地址。
+     * Retrieves the local host address.
      *
-     * @return 本地主机地址
-     * @throws UnknownHostException 如果无法解析本地主机名称为地址
+     * @return local host address
+     * @throws UnknownHostException if the local host name cannot be resolved to an address
      */
     public static String getLocalHostAddress() throws UnknownHostException {
         return InetAddress.getLocalHost().getHostAddress();
     }
 
     /**
-     * 获取当前机器的IP地址。
+     * Retrieves the IP address of the current machine.
      *
-     * @return 当前机器的IP地址
-     * @throws SocketException      如果发生I/O错误
-     * @throws UnknownHostException 如果无法解析本地主机名称为地址
+     * @return IP address of the current machine
+     * @throws SocketException      if an I/O error occurs
+     * @throws UnknownHostException if the local host name cannot be resolved to an address
      */
     public static String getLocalIp() throws SocketException, UnknownHostException {
-        // 遍历所有的网络接口
+        // Iterate over all network interfaces
         InetAddress candidateAddress = null;
         for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
             NetworkInterface networkInterface = interfaces.nextElement();
             for (Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses(); inetAddresses.hasMoreElements();) {
                 InetAddress address = inetAddresses.nextElement();
                 if (address.isLoopbackAddress() && address.getHostAddress().indexOf(':') != -1) {
-                    // 排除回环地址和 IPv6 地址
+                    // Exclude loopback and IPv6 addresses
                     continue;
                 }
 
                 if (address.isSiteLocalAddress()) {
-                    // 如果是站点本地地址，直接返回
+                    // If it's a site-local address, return it directly
                     return address.getHostAddress();
                 } else if (candidateAddress == null) {
-                    // 站点本地地址未被发现，先记录候选地址
+                    // If no site-local address is found, record the candidate address
                     candidateAddress = address;
                 }
             }
@@ -71,15 +71,15 @@ public final class LocalHostUtil {
     }
 
     /**
-     * 获取所有网卡的IP地址，排除回环地址、虚拟地址等。
+     * Retrieves IP addresses of all network interfaces, excluding loopback, virtual, and point-to-point addresses.
      *
-     * @return 所有网卡的IP地址数组
-     * @throws SocketException 如果发生I/O错误
+     * @return array of IP addresses of all network interfaces
+     * @throws SocketException if an I/O error occurs
      */
     public static String[] getLocalIps() throws SocketException {
         List<String> list = new ArrayList<>();
 
-        // 获取并遍历网卡设备
+        // Get and iterate through network interfaces
         Enumeration<NetworkInterface> enumeration = NetworkInterface.getNetworkInterfaces();
         while (enumeration.hasMoreElements()) {
             NetworkInterface netInter = enumeration.nextElement();
@@ -99,11 +99,11 @@ public final class LocalHostUtil {
     }
 
     /**
-     * 获取机器的MAC地址。
+     * Retrieves the MAC address of the machine.
      *
-     * @return 机器的MAC地址
-     * @throws SocketException      如果发生I/O错误
-     * @throws UnknownHostException 如果无法解析本地主机名称为地址
+     * @return MAC address of the machine
+     * @throws SocketException      if an I/O error occurs
+     * @throws UnknownHostException if the local host name cannot be resolved to an address
      */
     public static String getMacAddress() throws UnknownHostException, SocketException {
         InetAddress ia = InetAddress.getLocalHost();

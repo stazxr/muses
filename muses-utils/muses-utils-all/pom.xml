@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Parent project details -->
     <parent>
         <groupId>com.github.stazxr.muses</groupId>
         <artifactId>muses-utils</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <!-- Project details -->
     <artifactId>muses-utils-all</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <description>Muses 工具集，包含 utils-base、utils-log、utils-mask 模块</description>
+    <description>Utility Collection Module for Muses, includes All util modules</description>
 
+    <!-- Dependencies -->
     <dependencies>
+        <!-- Dependency on muses-utils-log -->
         <dependency>
             <groupId>com.github.stazxr.muses</groupId>
             <artifactId>muses-utils-log</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
+        <!-- Dependency on muses-utils-base -->
         <dependency>
             <groupId>com.github.stazxr.muses</groupId>
             <artifactId>muses-utils-base</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
+        <!-- Dependency on muses-utils-mask -->
         <dependency>
             <groupId>com.github.stazxr.muses</groupId>
             <artifactId>muses-utils-mask</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

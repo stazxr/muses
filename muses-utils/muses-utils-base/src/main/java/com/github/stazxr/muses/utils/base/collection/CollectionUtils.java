@@ -4,37 +4,40 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * 集合工具类，提供了一些常用的集合操作方法。
+ * Collection utility class providing commonly used operations on collections.
+ *
+ * This class includes methods for calculating initial capacity of HashMaps,
+ * checking if collections or maps are empty.
  *
  * @author SunTao
  * @since 2022-01-15
  */
 public class CollectionUtils {
     /**
-     * 计算 HashMap 的初始容量。
+     * Calculates the initial capacity of a HashMap.
      *
-     * @param expectedSize 期望的容量
-     * @return HashMap 的初始容量
+     * @param expectedSize the expected size
+     * @return the initial capacity of the HashMap
      */
     public static int mapSize(int expectedSize) {
         return (int) ((float) expectedSize / 0.75f + 1.0f);
     }
 
     /**
-     * 判断集合是否为空。
+     * Checks if a collection is empty.
      *
-     * @param collection 集合对象
-     * @return 如果集合为 {@code null} 或者为空则返回 {@code true}，否则返回 {@code false}
+     * @param collection the collection to check
+     * @return {@code true} if the collection is {@code null} or empty, otherwise {@code false}
      */
     public static boolean isEmpty(Collection<?> collection) {
         return (collection == null || collection.isEmpty());
     }
 
     /**
-     * 判断字典是否为空。
+     * Checks if a map is empty.
      *
-     * @param map 字典对象
-     * @return 如果字典为 {@code null} 或者为空则返回 {@code true}，否则返回 {@code false}
+     * @param map the map to check
+     * @return {@code true} if the map is {@code null} or empty, otherwise {@code false}
      */
     public static boolean isEmpty(Map<?, ?> map) {
         return (map == null || map.isEmpty());

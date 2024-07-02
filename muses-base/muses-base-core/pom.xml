@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Parent project details -->
     <parent>
         <groupId>com.github.stazxr.muses</groupId>
         <artifactId>muses-base</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <!-- Project details -->
     <artifactId>muses-base-core</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <description>Muses 基础核心模块，包含一些基础配置和实体等</description>
+    <description>Muses base core module containing basic configurations and entities</description>
 
+    <!-- Dependencies -->
     <dependencies>
         <!-- Spring Boot and Spring Web MVC -->
         <dependency>

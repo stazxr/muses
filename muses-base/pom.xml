@@ -4,20 +4,35 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Parent project details -->
     <parent>
         <groupId>com.github.stazxr.muses</groupId>
-        <artifactId>muses-dependencies</artifactId>
+        <artifactId>muses-root</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <!-- Project details -->
     <artifactId>muses-base</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <description>Muses 基础模块，提供基础设施和通用功能</description>
+    <description>Muses Base Module, providing foundational infrastructure and common functionality</description>
 
+    <!-- Submodules of the project -->
     <modules>
-        <module>muses-base-spring-context</module>
+        <module>muses-base-core</module>
+        <module>muses-base-exp</module>
+        <module>muses-base-log</module>
+        <module>muses-base-msg</module>
     </modules>
+
+    <!-- Dependencies -->
+    <dependencies>
+        <!-- Dependency on common utilities module -->
+        <dependency>
+            <groupId>com.github.stazxr.muses</groupId>
+            <artifactId>muses-utils-all</artifactId>
+        </dependency>
+    </dependencies>
 </project>

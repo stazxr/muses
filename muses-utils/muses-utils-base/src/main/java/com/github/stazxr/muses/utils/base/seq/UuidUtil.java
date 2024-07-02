@@ -3,7 +3,7 @@ package com.github.stazxr.muses.utils.base.seq;
 import java.util.UUID;
 
 /**
- * UUID工具类
+ * UUID utility class.
  *
  * @author SunTao
  * @since 2024-05-19
@@ -22,18 +22,18 @@ public class UuidUtil {
     };
 
     /**
-     * 获取UUID版本号
+     * Generates the UUID version number.
      *
-     * @return UUID版本
+     * @return UUID version
      */
     public static int genUuidVer() {
         return UUID.randomUUID().version();
     }
 
     /**
-     * 生成UUID字符串
+     * Generates a standard UUID string (32 characters without dashes).
      *
-     * @return UUID
+     * @return UUID string
      */
     public static String genUuidStr() {
         String str = UUID.randomUUID().toString();
@@ -41,9 +41,9 @@ public class UuidUtil {
     }
 
     /**
-     * 生成8位UUID字符串
+     * Generates an 8-character UUID string using a predefined character set.
      *
-     * @return UUID
+     * @return 8-character UUID string
      */
     public static String gen8BitUuidStr() {
         StringBuilder shortBuffer = new StringBuilder();
@@ -56,9 +56,9 @@ public class UuidUtil {
     }
 
     /**
-     * 生成16位UUID字符串
+     * Generates a 16-character UUID string using a predefined character set.
      *
-     * @return UUID
+     * @return 16-character UUID string
      */
     public static String gen16BitUuidStr() {
         StringBuilder shortBuffer = new StringBuilder();
