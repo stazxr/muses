@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    优先级：6个优先级从高到低依次为：OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
+ -->
+
+<!-- status:用来指定log4j本身的打印日志级别, monitorInterval:指定log4j自动重新配置的监测间隔时间 -->
+<configuration status="INFO" monitorInterval="300">
+    <!-- 自己设置属性，后面通过${}来访问 -->
+    <properties>
+        <property name="LOG_HOME">/home/${spring.application.name:muses-demo}/log</property>
+        <property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS}|%t|%level|%c{36}|%m%n</property>
+        <property name="LOG_PATTERN_COLOR">%highlight{%d{yyyy-MM-dd HH:mm:ss.SSS}|%t|%level|%c{36}|%m%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue, TRACE=blue}</property>
+    </properties>
+
+    <appenders>
+        <!--Appender 1. 输出到Console控制台，指定输出格式和过滤器等级为INFO -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN_COLOR}" />
+        </Console>
+    </appenders>
+
+    <!-- root 默认加载 -->
+    <loggers>
+        <root level="INFO">
+            <appender-ref ref="console" />
+        </root>
+    </loggers>
+</configuration>
