@@ -2,7 +2,7 @@ package com.github.stazxr.muses.base.core.properties;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.github.stazxr.muses.base.core.constants.MusesBasePropertiesPrefix;
+import com.github.stazxr.muses.base.core.constants.MusesPropertiesPrefixConstants;
 import com.github.stazxr.muses.base.core.entity.MusesContextTag;
 import com.github.stazxr.muses.base.core.exception.context.MusesContextErrorCode;
 import com.github.stazxr.muses.base.core.exception.context.MusesContextException;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-@ConfigurationProperties(prefix = MusesBasePropertiesPrefix.MUSES_CONTEXT_PREFIX)
+@ConfigurationProperties(prefix = MusesPropertiesPrefixConstants.MUSES_CONTEXT_PREFIX)
 public class MusesContextProperties implements Serializable, InitializingBean {
     private static final long serialVersionUID = 1761392456056935111L;
 

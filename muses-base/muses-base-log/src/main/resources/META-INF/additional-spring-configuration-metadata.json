@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "name": "muses.base.log.control",
+      "type": "com.github.stazxr.muses.base.log.properties.LogControlProperties",
+      "sourceType": "com.github.stazxr.muses.base.log.properties.LogControlProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "muses.base.log.control.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.github.stazxr.muses.base.log.properties.LogControlProperties",
+      "description": "Flag to enable or disable request and response logging. Default is false (logging disabled).",
+      "defaultValue": false
+    },
+    {
+      "name": "muses.base.log.control.excludePath",
+      "type": "java.util.List",
+      "sourceType": "com.github.stazxr.muses.base.log.properties.LogControlProperties",
+      "description": "List of paths for which logging should be disabled."
+    }
+  ],
+  "hints": []
+}

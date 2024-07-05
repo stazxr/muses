@@ -1,6 +1,6 @@
 package com.github.stazxr.muses.base.core.properties;
 
-import com.github.stazxr.muses.base.core.constants.MusesBasePropertiesPrefix;
+import com.github.stazxr.muses.base.core.constants.MusesPropertiesPrefixConstants;
 import com.github.stazxr.muses.utils.base.StringUtil;
 import com.github.stazxr.muses.utils.base.net.IpUtil;
 import com.github.stazxr.muses.utils.base.net.LocalHostUtil;
@@ -21,7 +21,7 @@ import java.io.Serializable;
  * @since 2024-05-05
  * @author SunTao
  */
-@ConfigurationProperties(prefix = MusesBasePropertiesPrefix.MUSES_HEADER_PREFIX)
+@ConfigurationProperties(prefix = MusesPropertiesPrefixConstants.MUSES_HEADER_PREFIX)
 public class MusesHeaderProperties implements Serializable, InitializingBean, EnvironmentAware {
     private static final long serialVersionUID = 6460641327160614388L;
 
@@ -42,7 +42,7 @@ public class MusesHeaderProperties implements Serializable, InitializingBean, En
     /**
      * Deployment information.
      */
-    private Deploy deploy;
+    private Deploy deploy = new Deploy();
 
     public String getSysCode() {
         return sysCode;
@@ -71,7 +71,7 @@ public class MusesHeaderProperties implements Serializable, InitializingBean, En
     @Override
     public void afterPropertiesSet() throws Exception {
         if (StringUtil.isBlank(sysCode)) {
-            throw new IllegalArgumentException("Parameter sysCode must not be blank.");
+            throw new IllegalArgumentException("Parameter [" + MusesPropertiesPrefixConstants.MUSES_HEADER_PREFIX + ".sysCode] must be set.");
         }
         String customDeployIp = environment.resolvePlaceholders("${muses.deploy-ip:}");
         String customDeployCount = environment.resolvePlaceholders("${muses.deploy-count:0}");
