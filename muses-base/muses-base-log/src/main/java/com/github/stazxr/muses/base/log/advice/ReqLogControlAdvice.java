@@ -1,6 +1,6 @@
 package com.github.stazxr.muses.base.log.advice;
 
-import com.github.stazxr.muses.base.log.cache.LogControlPathCacheManager;
+import com.github.stazxr.muses.base.log.cache.LogPathCacheManager;
 import com.github.stazxr.muses.base.log.context.LogControlSerNoContext;
 import com.github.stazxr.muses.base.log.properties.LogControlProperties;
 import com.github.stazxr.muses.utils.base.seq.UuidUtil;
@@ -31,7 +31,7 @@ public class ReqLogControlAdvice implements RequestBodyAdvice, Ordered {
 
     private LogControlProperties logControlProperties;
 
-    private LogControlPathCacheManager logControlPathCacheManager;
+    private LogPathCacheManager logPathCacheManager;
 
     /**
      * Checks if the advice supports processing based on configuration.
@@ -60,10 +60,10 @@ public class ReqLogControlAdvice implements RequestBodyAdvice, Ordered {
     @Override
     public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
         try {
-            String className = parameter.getContainingClass().getSimpleName();
-            String methodName = parameter.getMethod() == null ? "" : parameter.getMethod().getName();
-            String serNo = LogControlSerNoContext.exist() ? "[" + LogControlSerNoContext.get() + "]" : "";
-            if (logControlPathCacheManager.enabledLog(httpServletRequest.getServletPath())) {
+            if (logPathCacheManager.enabledLog(httpServletRequest.getServletPath())) {
+                String className = parameter.getContainingClass().getSimpleName();
+                String methodName = parameter.getMethod() == null ? "" : parameter.getMethod().getName();
+                String serNo = LogControlSerNoContext.exist() ? "[" + LogControlSerNoContext.get() + "]" : "";
                 log.info("{}.{}{} request param is: {}", className, methodName, serNo, MaskUtil.toMaskString(body));
             }
         } catch (Exception e) {
@@ -101,8 +101,8 @@ public class ReqLogControlAdvice implements RequestBodyAdvice, Ordered {
      * Sets the LogControlPathCacheManager instance via dependency injection.
      */
     @Autowired
-    public void setLogControlPathCacheManager(LogControlPathCacheManager logControlPathCacheManager) {
-        this.logControlPathCacheManager = logControlPathCacheManager;
+    public void setLogControlPathCacheManager(LogPathCacheManager logPathCacheManager) {
+        this.logPathCacheManager = logPathCacheManager;
     }
 
     /**

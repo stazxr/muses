@@ -11,13 +11,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Cache for controlling logging based on request paths.
- * This class manages inclusion and exclusion of paths for logging.
+ * This class manages inclusion and exclusion of paths for.
  *
  * @author SunTao
  * @since 2024-05-19
  */
 @Slf4j
-public class LogControlPathCache {
+public class LogPathCache {
     /**
      * Map of paths that are included for logging.
      */

@@ -1,6 +1,6 @@
 package com.github.stazxr.muses.base.log.advice;
 
-import com.github.stazxr.muses.base.log.cache.LogControlPathCacheManager;
+import com.github.stazxr.muses.base.log.cache.LogPathCacheManager;
 import com.github.stazxr.muses.base.log.context.LogControlSerNoContext;
 import com.github.stazxr.muses.base.log.properties.LogControlProperties;
 import com.github.stazxr.muses.utils.mask.MaskUtil;
@@ -30,7 +30,7 @@ public class ResLogControlAdvice implements ResponseBodyAdvice<Object>, Ordered 
 
     private LogControlProperties logControlProperties;
 
-    private LogControlPathCacheManager logControlPathCacheManager;
+    private LogPathCacheManager logPathCacheManager;
 
     /**
      * Checks if the advice supports processing based on configuration.
@@ -46,10 +46,10 @@ public class ResLogControlAdvice implements ResponseBodyAdvice<Object>, Ordered 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         try {
-            String simpleName = returnType.getContainingClass().getSimpleName();
-            String methodName = returnType.getMethod() == null ? "" : returnType.getMethod().getName();
-            String serNo = LogControlSerNoContext.exist() ? "[" + LogControlSerNoContext.get() + "]" : "";
-            if (logControlPathCacheManager.enabledLog(httpServletRequest.getServletPath())) {
+            if (logPathCacheManager.enabledLog(httpServletRequest.getServletPath())) {
+                String simpleName = returnType.getContainingClass().getSimpleName();
+                String methodName = returnType.getMethod() == null ? "" : returnType.getMethod().getName();
+                String serNo = LogControlSerNoContext.exist() ? "[" + LogControlSerNoContext.get() + "]" : "";
                 log.info("{}.{}{} response body is: {}", simpleName, methodName, serNo, MaskUtil.toMaskString(body));
             }
         } catch (Exception e) {
@@ -81,8 +81,8 @@ public class ResLogControlAdvice implements ResponseBodyAdvice<Object>, Ordered 
      * Sets the LogControlPathCacheManager instance via dependency injection.
      */
     @Autowired
-    public void setLogControlPathCacheManager(LogControlPathCacheManager logControlPathCacheManager) {
-        this.logControlPathCacheManager = logControlPathCacheManager;
+    public void setLogControlPathCacheManager(LogPathCacheManager logPathCacheManager) {
+        this.logPathCacheManager = logPathCacheManager;
     }
 
     /**

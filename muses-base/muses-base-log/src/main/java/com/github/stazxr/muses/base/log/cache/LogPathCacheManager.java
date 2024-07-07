@@ -9,14 +9,14 @@ import javax.annotation.PostConstruct;
 
 /**
  * Manager for controlling logging based on request paths.
- * This component initializes and manages the path cache for logging control.
+ * This component initializes and manages the path cache for logging.
  *
  * @author SunTao
  * @since 2024-05-19
  */
 @Slf4j
 @Component
-public class LogControlPathCacheManager {
+public class LogPathCacheManager {
     private LogControlProperties logControlProperties;
 
     /**
@@ -24,7 +24,7 @@ public class LogControlPathCacheManager {
      */
     @PostConstruct
     public void initCache() {
-        LogControlPathCache.clearCache();
+        LogPathCache.clearCache();
     }
 
     /**
@@ -35,7 +35,7 @@ public class LogControlPathCacheManager {
      */
     public boolean enabledLog(String path) {
         try {
-            return LogControlPathCache.allowedLogWithCache(path, logControlProperties.getExcludePath());
+            return LogPathCache.allowedLogWithCache(path, logControlProperties.getExcludePath());
         } catch (Exception e) {
             log.error("LogControlPathCacheManager -> LogControlPathCache error", e);
             return false;
